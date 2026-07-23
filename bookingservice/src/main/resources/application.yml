@@ -1,0 +1,32 @@
+# Conversion to YAML from Properties formar report
+# Warnings:
+# - The yaml file had comments which are lost in the refactoring!
+spring:
+  application:
+    name: bookingservice
+    
+  datasource:
+    url: jdbc:mysql://localhost:3306/ticketing
+    username: myuser
+    password: secret
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+  kafka:
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+server:
+  port: 8081
+
+kafka:
+  topic:
+    booking: booking
+
+inventory:
+  service:
+    url: http://localhost:8080/api/v1/inventory
