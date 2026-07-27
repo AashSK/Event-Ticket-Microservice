@@ -1,5 +1,37 @@
+server:
+  port: 8082
+
 spring:
   application:
     name: apigateway
-server:
-  port: 8082
+#  Gateway Routing Logic in YAML below
+  cloud:
+    gateway:
+      httpclient:
+        connect-timeout: 5000
+        response-timeout: 5s 
+
+      # mvc:
+      #   routes:
+      #     - id: booking-service
+      #       uri: http://localhost:8081
+      #       predicates:
+      #         - Path=/api/v1/booking
+      #         - Method=POST
+      #       filters:
+      #         - name: CircuitBreaker
+      #           args:
+      #             name: bookingServiceCircuitBreaker
+      #             fallbackUri: forward:/fallbackRoute
+
+      #     - id: inventory-service
+      #       uri: http://localhost:8080
+      #       predicates:
+      #         - Path=/api/v1/inventory/**
+      #         - Method=GET,PUT
+      #       filters:
+      #         - name: CircuitBreaker
+      #           args:
+      #             name: inventoryServiceCircuitBreaker
+      #             fallbackUri: forward:/fallbackRoute
+
