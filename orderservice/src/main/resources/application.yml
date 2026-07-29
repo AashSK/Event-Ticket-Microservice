@@ -22,7 +22,7 @@ spring:
         spring.json.value.default.type: com.bookingservice.event.BookingEvent
 
 server:
-  port: 8082
+  port: 8083
   address: 127.0.0.1 #--> accessable only locally 
 
 inventory:
