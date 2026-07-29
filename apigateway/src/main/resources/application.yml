@@ -4,6 +4,11 @@ server:
 spring:
   application:
     name: apigateway
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://127.0.0.1:8091/realms/ticketing-security-realm
 #  Gateway Routing Logic in YAML below
   cloud:
     gateway:
@@ -35,3 +40,6 @@ spring:
       #             name: inventoryServiceCircuitBreaker
       #             fallbackUri: forward:/fallbackRoute
 
+keycloak:
+  auth:
+    jwk-set-uri: http://127.0.0.1:8091/realms/ticketing-security-realm/protocol/openid-connect/certs
