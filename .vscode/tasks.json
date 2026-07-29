@@ -1,0 +1,46 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "API Gateway",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceFolder}/inventory-microservices/apigateway"
+            },
+            "command": "./gradlew build -x test && java -jar $(find build/libs -name '*.jar' ! -name '*plain.jar')"
+        },
+        {
+            "label": "Inventory Service",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceFolder}/inventory-microservices/inventoryservice"
+            },
+            "command": "./gradlew build -x test && java -jar $(find build/libs -name '*.jar' ! -name '*plain.jar')",
+        },
+        {
+            "label": "Order Service",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceFolder}/inventory-microservices/orderservice"
+            },
+            "command": "./gradlew build -x test && java -jar $(find build/libs -name '*.jar' ! -name '*plain.jar')"
+        },
+        {
+            "label": "Booking Service",
+            "type": "shell",
+            "command": "cd /workspaces/codespaces-blank/inventory-microservices/bookingservice && ./gradlew build -x test && java -jar $(find build/libs -name '*.jar' ! -name '*plain.jar')"
+        },
+        {
+            "label": "Start All Services",
+            "dependsOn": [
+                "API Gateway",
+                "Inventory Service",
+                "Order Service",
+                "Booking Service"
+            ],
+            "dependsOrder": "parallel"
+        }
+    ]
+}
