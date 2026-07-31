@@ -15,9 +15,9 @@
             "label": "Inventory Service",
             "type": "shell",
             "options": {
-                "cwd": "${workspaceFolder}/inventory-microservices/inventoryservice"
+                "cwd": "${workspaceFolder}/inventoryservice"
             },
-            "command": "./gradlew build -x test && java -jar $(find build/libs -name '*.jar' ! -name '*plain.jar')",
+            "command": "./gradlew processAot && ./gradlew bootJar -x test && java -Dspring.aot.enabled=true -jar $(find build/libs -name '*.jar' ! -name '*plain.jar')",
         },
         {
             "label": "Order Service",
