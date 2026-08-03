@@ -64,6 +64,9 @@ resilience4j:
         waitDurationInOpenState: 5s
         permittedNumberOfCallsInHalfOpenState: 2
         automaticTransitionFromOpenToHalfOpenEnabled: true
+    instances:
+      bookingServiceCircuitBreaker:
+        baseConfig: default
 
   timelimiter:
     configs:
