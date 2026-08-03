@@ -13,6 +13,7 @@ import org.springframework.web.servlet.function.ServerResponse;
 
 @Configuration
 public class BookingServiceRoutes {
+
         @Bean
         public RouterFunction<ServerResponse> bookingRoutes() {
                 return route("booking-service")
