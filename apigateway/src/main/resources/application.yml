@@ -43,3 +43,10 @@ spring:
 keycloak:
   auth:
     jwk-set-uri: http://127.0.0.1:8091/realms/ticketing-security-realm/protocol/openid-connect/certs
+
+#Actuator
+management.health.circuitbreakers.enabled: true
+
+#Exposing all endpoints
+management.endpoints.web.exposure.include: '*'
+management.endpoint.health.show-details: always
