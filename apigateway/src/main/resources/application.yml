@@ -50,3 +50,28 @@ management.health.circuitbreakers.enabled: true
 #Exposing all endpoints
 management.endpoints.web.exposure.include: '*'
 management.endpoint.health.show-details: always
+
+#Resilience4j properties
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        registerHealthIndicator: true
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 8
+        failureRateThreshold: 50
+        minimumNumberOfCalls: 4
+        waitDurationInOpenState: 5s
+        permittedNumberOfCallsInHalfOpenState: 2
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+
+  timelimiter:
+    configs:
+      default:
+        timeoutDuration: 3s
+
+  retry:
+    configs:
+      default:
+        maxAttempts: 3
+        waitDuration: 2s

@@ -4,8 +4,10 @@ import static org.springframework.cloud.gateway.server.mvc.filter.BeforeFilterFu
 import static org.springframework.cloud.gateway.server.mvc.filter.CircuitBreakerFilterFunctions.circuitBreaker;
 import static org.springframework.cloud.gateway.server.mvc.handler.GatewayRouterFunctions.route;
 import static org.springframework.cloud.gateway.server.mvc.handler.HandlerFunctions.http;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.servlet.function.RouterFunction;
 import org.springframework.web.servlet.function.ServerResponse;
 
@@ -17,9 +19,18 @@ public class BookingServiceRoutes {
                                 .POST("/api/v1/booking",
                                                 http())
                                 .before(uri("http://localhost:8081/api/v1/booking"))
-                                /* .filter(circuitBreaker(config -> config
+                                .filter(circuitBreaker(config -> config
                                                 .setId("bookingServiceCircuitBreaker")
-                                                .setFallbackUri("forward:/fallbackRoute"))) */
+                                                .setFallbackUri("forward:/fallbackRoute")))
+                                .build();
+        }
+
+        @Bean
+        public RouterFunction<ServerResponse> fallback() {
+                return route("fallbackRoute")
+                                .POST("/fallbackRoute",
+                                                req -> ServerResponse.status(HttpStatus.SERVICE_UNAVAILABLE)
+                                                                .body("Booking service is currently down"))
                                 .build();
         }
 
