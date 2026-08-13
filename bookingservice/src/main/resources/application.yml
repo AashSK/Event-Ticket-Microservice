@@ -22,7 +22,7 @@ spring:
 
 server:
   port: 8081
-  address: 127.0.0.1 #--> accessable only locally 
+  #address: 127.0.0.1 #--> accessable only locally 
 
 kafka:
   topic:
@@ -31,3 +31,12 @@ kafka:
 inventory:
   service:
     url: http://localhost:8080/api/v1/inventory
+
+
+#OpenAPI
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /v3/api-docs
