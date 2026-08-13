@@ -9,6 +9,23 @@ spring:
       resourceserver:
         jwt:
           issuer-uri: http://127.0.0.1:8091/realms/ticketing-security-realm
+
+#OpenAPI
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    urls:
+      - name: Inventory Service
+        url: /docs/inventoryservice/v3/api-docs
+      - name: Booking Service
+        url: /docs/bookingservice/v3/api-docs
+  api-docs:
+    path: /v3/api-docs
+
+security:
+  excluded:
+   urls: /swagger-ui.html,/swagger-ui/**,/docs/**,/v3/api-docs/**,/swagger-resources/**,/api-docs/**
+
 #  Gateway Routing Logic in YAML below
   cloud:
     gateway:

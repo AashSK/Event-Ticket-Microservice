@@ -1,5 +1,6 @@
 package com.apigateway.route;
 
+import static org.springframework.cloud.gateway.server.mvc.filter.BeforeFilterFunctions.setPath;
 import static org.springframework.cloud.gateway.server.mvc.filter.BeforeFilterFunctions.uri;
 import static org.springframework.cloud.gateway.server.mvc.filter.CircuitBreakerFilterFunctions.circuitBreaker;
 import static org.springframework.cloud.gateway.server.mvc.handler.GatewayRouterFunctions.route;
@@ -32,6 +33,15 @@ public class BookingServiceRoutes {
                                 .POST("/fallbackRoute",
                                                 req -> ServerResponse.status(HttpStatus.SERVICE_UNAVAILABLE)
                                                                 .body("Booking service is currently down"))
+                                .build();
+        }
+
+        @Bean
+        public RouterFunction<ServerResponse> bookingServiceApiDocs() {
+                return route("booking-service-api-docs")
+                                .GET("/docs/bookingservice/v3/api-docs", http())
+                                .before(uri("http://localhost:8081"))
+                                .before(setPath("/v3/api-docs"))
                                 .build();
         }
 
