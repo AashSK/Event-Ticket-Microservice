@@ -22,7 +22,7 @@ spring:
 
 server:
   port: 8081
-  #address: 127.0.0.1 #--> accessable only locally 
+  address: 127.0.0.1 #--> accessable only locally 
 
 kafka:
   topic:
